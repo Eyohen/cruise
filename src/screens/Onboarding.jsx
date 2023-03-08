@@ -29,7 +29,7 @@ const Onboarding = ({ navigation, onPress }) => {
       <Text style={styles.text}>Set up your Profile</Text>
       <View style={styles.button}>
         <GeneralButton
-          backgroundColor={"#a232a8"}
+          backgroundColor={"#052941"}
           message="Continue with Email"
           color={"#ffffff"}
           marginLeft={0}
@@ -37,7 +37,12 @@ const Onboarding = ({ navigation, onPress }) => {
           navigation={navigation}
         />
 
-        <Text style={styles.text2}> OR </Text>
+        <Text style={styles.text2}>already have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("example")}>
+          <Text style={styles.text3}>signin here</Text>
+        </TouchableOpacity>
+
+        {/* <Text style={styles.text2}> OR </Text>
         <GeneralButton
           backgroundColor={"#ffffff"}
           message="Continue with Google"
@@ -45,7 +50,7 @@ const Onboarding = ({ navigation, onPress }) => {
           marginLeft={0}
           marginTop={60}
           imageUri={require("../../assets/googleicon.png")}
-        />
+        /> */}
       </View>
     </SafeAreaView>
   );
@@ -71,54 +76,23 @@ const styles = StyleSheet.create({
   },
   text2: {
     fontWeight: "400",
-    fontSize: 20,
+    fontSize: 16,
     color: "#273B4A",
     paddingLeft: 25,
-    marginTop: 70,
-    marginLeft: 110,
+    marginTop: 10,
+    //marginLeft: 110,
+  },
+  text3: {
+    fontWeight: "500",
+    fontSize: 16,
+    color: "#BEE106",
+    paddingLeft: 213,
+    //paddingTop: 10,
+    marginTop: -20,
   },
   button: {
     marginHorizontal: 30,
     marginTop: 30,
-  },
-
-  slide: {
-    borderBottomColor: "#273B4A",
-    borderBottomWidth: 5,
-    width: 34,
-    //marginTop: -10,
-    marginVertical: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 25,
-    //borderRadius: 4,
-  },
-  slide1: {
-    borderBottomColor: "#D9D9D9",
-    borderBottomWidth: 5,
-    width: 34,
-    //marginTop: -10,
-    marginVertical: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 25,
-    //borderRadius: 4,
-  },
-  grid3: {
-    display: "flex",
-    flexDirection: "row",
-    //justifyContent: 'space-between',
-    //width: 310
-    marginTop: 17,
-    marginLeft: 90,
-  },
-  grid4: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    //justifyContent: 'center',
-    width: 370,
-    paddingLeft: 20,
   },
 });
 export default Onboarding;

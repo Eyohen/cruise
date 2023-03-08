@@ -18,14 +18,16 @@ function GeneralButton({
   marginTop,
   imageUri,
   route,
+  marginHorizontal,
 }) {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(route)}>
+    <TouchableOpacity onPress={() => onPress()}>
       <View
         style={{
           ...styles.button,
           backgroundColor: backgroundColor,
           marginTop: marginTop,
+          marginHorizontal: marginHorizontal,
           imageUri: imageUri,
         }}
       >

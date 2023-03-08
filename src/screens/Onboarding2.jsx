@@ -39,11 +39,17 @@ const Onboarding2 = ({ navigation, onPress }) => {
       <Text style={styles.text2}>
         We'll send you your ride receipts via Email
       </Text>
-      <GeneralInput placeholder={"Email"} marginHorizontal={27} />
+      <GeneralInput
+        placeholder={"Email"}
+        marginHorizontal={27}
+        backgroundColor={"#EEEEEE"}
+        height={55}
+        width={330}
+      />
 
       <View style={styles.button}>
         <GeneralButton
-          backgroundColor={"#a232a8"}
+          backgroundColor={"#052941"}
           message="Continue"
           color={"#ffffff"}
           marginLeft={0}

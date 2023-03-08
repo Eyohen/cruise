@@ -14,47 +14,61 @@ import {
 } from "react-native";
 import GenInput from "../General/GeneralInput";
 import GeneralButton from "../General/GeneralButton";
-
-import Feather from "@expo/vector-icons/Feather";
-
 import { Ionicons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
-const LocationScroll = ({ navigation, onPress, setModalOpen, modalOpen }) => {
+// function ClickSearch({ value, setValue, name }) {
+//   // const [checked, setChecked] = useState(false)
+
+//   function onCheckmarkPress() {
+//     setValue(name);
+//   }
+
+//   return (
+//     <Pressable onPress={onCheckmarkPress}>
+//       {value === name ? (
+
+//       ) : (
+//         <Ionicons name="radio-button-off" size={24} color="black" />
+//       )}
+//     </Pressable>
+//   );
+// }
+
+function DestinationSlide() {
+  const [modalOpen, setModalOpen] = useState(false);
   const [currentLocation, setCurrentLocation] = useState("");
   const [destination, setDestination] = useState("");
+  const [isChanged, setIsChanged] = useState("");
+  const [isSearched, setIsSearched] = useState("");
 
   return (
     <View>
-      <Modal visible={modalOpen} animationType="slide" transparent={true}>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            Keyboard.dismiss();
-          }}
-        >
-          <View style={styles.modalContent2}>
-            <View style={{ marginBottom: 20 }}></View>
-            <TouchableOpacity onPress={() => setModalOpen(false)}>
-              <View
-                style={{
-                  borderBottomColor: "#D6D6D6",
-                  borderBottomWidth: 5,
-                  width: 44,
-                  marginTop: -10,
-                  marginVertical: 30,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginLeft: 160,
-                  borderRadius: 4,
+      {!isSearched ? (
+        <View style={styles.Container}>
+          <View style={{ marginBottom: 20 }}></View>
+          {/* <TouchableOpacity onPress={() => setModalOpen(false)}> */}
+          <View
+            style={{
+              borderBottomColor: "#D6D6D6",
+              borderBottomWidth: 5,
+              width: 44,
+              marginTop: -10,
+              marginVertical: 30,
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: 160,
+              borderRadius: 4,
 
-                  //fontSize: 50,
-                }}
-              ></View>
-            </TouchableOpacity>
-
-            {/* <TouchableOpacity onPress={() => setModalOpen(false)}>
+              //fontSize: 50,
+            }}
+          ></View>
+          {/* </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() => setIsSearched((isSearched) => !isSearched)}
+          >
             <View style={styles.searchcard}>
               <Ionicons
                 name="search-outline"
@@ -62,11 +76,12 @@ const LocationScroll = ({ navigation, onPress, setModalOpen, modalOpen }) => {
                 color="black"
                 style={styles.shift}
               />
-              <Text style={styles.text1}>Where to?</Text>
+              <Text style={styles.text1}>
+                {isChanged ? "Where to?" : "go joor"}
+              </Text>
             </View>
           </TouchableOpacity>
-          <View style={{ marginBottom: 60 }}></View>
-
+          <View style={{ marginBottom: 20 }}></View>
           <Ionicons
             name="home-outline"
             size={24}
@@ -92,14 +107,25 @@ const LocationScroll = ({ navigation, onPress, setModalOpen, modalOpen }) => {
             style={styles.icons}
           />
           <Text style={styles.text}>Eko Hotel Suites</Text>
-            <Text style={styles.text2}>No. 2 Lawanson Road, Ikeja</Text> */}
-
-            <AntDesign
-              name="close"
-              size={33}
-              color="black"
-              style={{ marginLeft: 20, marginTop: 20 }}
-            />
+          <Text style={styles.text2}>No. 2 Lawanson Road, Ikeja</Text>
+        </View>
+      ) : (
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Keyboard.dismiss();
+          }}
+        >
+          <View style={styles.Container2}>
+            <TouchableOpacity
+              onPress={() => setIsSearched((isSearched) => !isSearched)}
+            >
+              <AntDesign
+                name="close"
+                size={33}
+                color="black"
+                style={{ marginLeft: 20, marginTop: 70 }}
+              />
+            </TouchableOpacity>
             <Text style={styles.topic}>Select Destination</Text>
             <View style={styles.center}>
               <GenInput
@@ -108,61 +134,65 @@ const LocationScroll = ({ navigation, onPress, setModalOpen, modalOpen }) => {
                 value={currentLocation}
                 onChangeValue={setCurrentLocation}
                 keyboardType={"default"}
+                marginTop={30}
+                backgroundColor={"#EEEEEE"}
+                height={55}
               />
               <GenInput
                 placeholder={"Destination"}
                 value={destination}
                 onChangeValue={setDestination}
                 keyboardType={"default"}
+                backgroundColor={"#EEEEEE"}
+                height={55}
               />
             </View>
+            <Text style={styles.topic2}>
+              Please keep stop times {"\n"}
+              short
+            </Text>
+            <Text style={styles.faint}>
+              Be considerate of your driver; when{"\n"}you stop, don't keep them
+              waiting{"\n"} for too long
+            </Text>
 
             <GeneralButton
-              message={"Choose on map"}
-              marginTop={410}
               marginHorizontal={30}
-              navigation={navigation}
-              route={"onboarding3"}
+              marginTop={30}
+              message={"Done"}
+              marginLeft={-25}
+              backgroundColor={"#052941"}
+              color={"#ffffff"}
             />
           </View>
         </TouchableWithoutFeedback>
-      </Modal>
+      )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  Space: {
-    paddingLeft: 20,
-    paddingVertical: 24,
-    //height: '100%',
+  Container: {
     backgroundColor: "#FFFFFF",
-    position: "relative",
-    top: -30,
-    marginBottom: 40,
-    marginTop: -15,
-    height: 1500,
-    marginHorizontal: 50,
-  },
+    //backgroundColor: "#000000",
 
-  marginContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginRight: 20,
+    marginTop: 350,
+    height: 470,
+
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
   },
   line1: {
     borderBottomColor: "#8F8F8F",
     opacity: 0.5,
     borderBottomWidth: 1,
-    width: 420,
+    width: 300,
     marginTop: 10,
     marginVertical: 30,
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 10,
-    marginLeft: -30,
+    marginLeft: 45,
   },
   searchcard: {
     height: 55,
@@ -180,66 +210,6 @@ const styles = StyleSheet.create({
   center: {
     marginHorizontal: 30,
   },
-  // white: {
-  //   marginTop: 20,
-  //   marginLeft: 20,
-  // },
-
-  // header: {
-  //   backgroundColor: "#FFFFFF",
-  //   shadowColor: "#333333",
-  //   shadowOffset: { width: -1, height: -3 },
-  //   shadowRadius: 2,
-  //   shadowOpacity: 0.4,
-  //   //elevation: 5,
-  //   paddingTop: 20,
-  //   borderTopLeftRadius: 20,
-  //   borderTopRightRadius: 20,
-  // },
-
-  // first: {
-  //   width: "100%",
-  //   backgroundColor: "#F8F8F8",
-  //   borderTopLeftRadius: 30,
-  //   borderTopRightRadius: 30,
-  //   padding: 20,
-  //   position: "absolute",
-
-  //   zIndex: 100,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   maxHeight: 300,
-  //   shadowColor: "#000",
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 12,
-  //   },
-  //   shadowOpacity: 0.58,
-  //   shadowRadius: 16.0,
-  //   bottom: -590,
-  //   elevation: 24,
-  // },
-  modalContent: {
-    //maxHeight: 300,
-    height: 600,
-
-    backgroundColor: "#FFFFFF",
-
-    bottom: -370,
-    borderTopLeftRadius: 27,
-    borderTopRightRadius: 27,
-  },
-  modalContent2: {
-    //maxHeight: 300,
-    height: 850,
-
-    backgroundColor: "#FFFFFF",
-
-    // bottom: 0,
-    //borderTopLeftRadius: 27,
-    //borderTopRightRadius: 27,
-  },
-
   text1: {
     color: "#000000",
     fontWeight: "400",
@@ -258,7 +228,7 @@ const styles = StyleSheet.create({
   },
   text2: {
     color: "#8F8F8F",
-    fontWeight: "400",
+    fontWeight: "300",
     fontSize: 18,
     paddingLeft: 80,
 
@@ -272,7 +242,34 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     // marginTop: 10,
   },
-  modalToggle: {},
+
+  Container2: {
+    backgroundColor: "#FFFFFF",
+    //backgroundColor: "black",
+
+    marginTop: 0,
+    height: 850,
+  },
+  topic: {
+    fontSize: 25,
+    fontWeight: "700",
+    marginHorizontal: 85,
+    marginTop: -30,
+  },
+  topic2: {
+    fontSize: 25,
+    fontWeight: "700",
+    marginHorizontal: 30,
+    marginTop: 220,
+    color: "#2F2F2F",
+  },
+  faint: {
+    fontSize: 15.5,
+    fontWeight: "450",
+    marginHorizontal: 30,
+    marginTop: 0,
+    color: "#2F2F2F",
+  },
 });
 
-export default LocationScroll;
+export default DestinationSlide;
